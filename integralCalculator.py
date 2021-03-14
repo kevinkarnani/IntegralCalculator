@@ -1,4 +1,5 @@
 import numpy as np
+from math import sin, cos, tan, asin, acos, atan, exp, log10, log2, log
 import matplotlib.pyplot as plt
 
 class IntegralCalculator:
@@ -18,10 +19,10 @@ class IntegralCalculator:
 
         return integral * dx
 
-    def plotHistogram(self, integralFunc):
+    def plotHistogram(self):
         areas = np.array([], dtype=np.float64)
         for _ in range(self.n):
-            areas = np.append(areas, integralFunc())
+            areas = np.append(areas, self.monteCarloIntegral())
         plt.title("Area Distribution")
         plt.hist(areas, bins=30, ec='black')
         plt.xlabel("Area Calculated")
@@ -65,6 +66,7 @@ class IntegralCalculator:
         return integral * dx
 
 if __name__ == "__main__":
+    print("Welcome to the Numerical Integral Calculator!")
     try:
         A = float(input("Initial Limit of Integration:\n"))
         B = float(input("Final Limit of Integration:\n"))
@@ -76,6 +78,6 @@ if __name__ == "__main__":
         print(f'Middle Reimann Sum: {calculator.midReimannSum()}')
         print(f'Trapezoid Reimann Sum: {calculator.trapezoidReimannSum()}')
         print(f'Right Reimann Sum: {calculator.rightReimannSum()}')
-        # integral.plotHistogram()
+        calculator.plotHistogram()
     except Exception:
         print("Bad Input. Try Again")
